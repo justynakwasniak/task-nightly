@@ -32,6 +32,7 @@ The goal of this project was to simulate a real-time network visualization inspi
 First, install dependencies:
 
 ```bash
+
 npm install
 
 Run development server:
@@ -42,17 +43,22 @@ Open:
 
 http://localhost:3000
 
-
+---
 🔧 Project Structure
 /app/api/validators – API route with rate limiting
 /components/Globe – 3D globe visualization
 /hooks/useValidators – data fetching logic
 /lib/validators – mock data generator
 
+---
+
 ⚠️ Notes
+
 Data is currently mocked for demonstration purposes
 API layer is designed to simulate a secure backend for future IOTA RPC integration
 This is a recruitment task implementation demonstrating frontend and API layer design for a blockchain data visualization use case.
+
+---
 
 📌 Future Improvements
 Replace mock data with real IOTA validator API
