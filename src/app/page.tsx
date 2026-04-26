@@ -1,4 +1,4 @@
-import GlobeComponent from "@/src/components/Globe/Globe";
+import GlobeComponent from "@/src/components/Globe/GlobeComponent";
 import { generateMockValidators } from "@/src/lib/validators";
 
 export default function Home() {

@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IOTA Validators Globe
 
-## Getting Started
+This is a Next.js 19 project that visualizes IOTA validators on an interactive 3D globe using Globe.gl.
 
-First, run the development server:
+The goal of this project was to simulate a real-time network visualization inspired by blockchain monitoring dashboards.
+
+---
+
+## 🚀 Features
+
+- Interactive 3D globe (Globe.gl + Three.js)
+- Validators displayed as dynamic points on the map
+- Click interaction with camera focus on selected validator
+- Responsive UI (desktop + mobile layouts)
+- Live data updates via polling (mocked API layer)
+- Separation between frontend and API layer
+
+---
+
+## 🧱 Tech Stack
+
+- Next.js 19 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS
+- Globe.gl (Three.js based visualization)
+
+---
+
+## 📦 Getting Started
+
+First, install dependencies:
 
 ```bash
+npm install
+
+Run development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+🔧 Project Structure
+/app/api/validators – API route with rate limiting
+/components/Globe – 3D globe visualization
+/hooks/useValidators – data fetching logic
+/lib/validators – mock data generator
 
-To learn more about Next.js, take a look at the following resources:
+⚠️ Notes
+Data is currently mocked for demonstration purposes
+API layer is designed to simulate a secure backend for future IOTA RPC integration
+This is a recruitment task implementation demonstrating frontend and API layer design for a blockchain data visualization use case.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📌 Future Improvements
+Replace mock data with real IOTA validator API
+Replace polling with WebSockets or streaming updates
+Improve geolocation accuracy for validators

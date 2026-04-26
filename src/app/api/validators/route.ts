@@ -11,9 +11,6 @@ type RateEntry = {
 
 const requestCounts = new Map<string, RateEntry>();
 
-/**
- * Remove expired rate limit entries
- */
 function cleanupOldEntries() {
   const now = Date.now();
 
@@ -24,9 +21,6 @@ function cleanupOldEntries() {
   }
 }
 
-/**
- * Basic in-memory rate limiting (per IP per window)
- */
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
   const windowKey = `${ip}-${Math.floor(now / RATE_WINDOW_MS)}`;
@@ -48,9 +42,6 @@ function checkRateLimit(ip: string): boolean {
   return true;
 }
 
-/**
- * Extract client IP (best-effort)
- */
 function getClientIp(request: Request): string {
   const xForwardedFor = request.headers.get("x-forwarded-for");
 
@@ -59,9 +50,6 @@ function getClientIp(request: Request): string {
   return xForwardedFor.split(",")[0].trim();
 }
 
-/**
- * Common security headers
- */
 function buildHeaders(origin: string | null, extra?: Record<string, string>) {
   return {
     "X-Content-Type-Options": "nosniff",
@@ -71,9 +59,6 @@ function buildHeaders(origin: string | null, extra?: Record<string, string>) {
   };
 }
 
-/**
- * GET /api/validators
- */
 export async function GET(request: Request) {
   const origin = request.headers.get("origin");
   const ip = getClientIp(request);
@@ -89,14 +74,13 @@ export async function GET(request: Request) {
         headers: buildHeaders(origin, {
           "Retry-After": "60",
         }),
-      }
+      },
     );
   }
 
   try {
     const validators = generateMockValidators();
 
-    // Simulated latency
     const delay = Math.random() * 150 + 50;
     await new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -111,8 +95,7 @@ export async function GET(request: Request) {
   } catch (error) {
     console.error("Validator API error:", error);
 
-    const message =
-      error instanceof Error ? error.message : "Unknown error";
+    const message = error instanceof Error ? error.message : "Unknown error";
 
     return NextResponse.json(
       {
@@ -126,14 +109,11 @@ export async function GET(request: Request) {
           "Cache-Control": "no-cache, no-store, must-revalidate",
           "X-Error-Source": "IOTA API",
         }),
-      }
+      },
     );
   }
 }
 
-/**
- * OPTIONS /api/validators (CORS preflight)
- */
 export async function OPTIONS(request: Request) {
   const origin = request.headers.get("origin");
 
