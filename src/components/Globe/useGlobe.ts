@@ -23,7 +23,7 @@ export function useGlobe(containerRef: React.RefObject<HTMLDivElement | null>) {
 
       if (!isMounted || !containerRef.current) return;
 
-      const Globe = GlobeModule.default;
+      const Globe = GlobeModule.default as any;
 
       globeInstance = Globe()(containerRef.current)
         .globeImageUrl("//unpkg.com/three-globe/example/img/earth-night.jpg")
