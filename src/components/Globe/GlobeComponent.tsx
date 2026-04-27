@@ -14,13 +14,16 @@ export default function GlobeComponent({
   initialValidators?: Validator[];
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const { globeRef, getAltitude } = useGlobe(containerRef);
+
+  const { globeRef, getAltitude, isReady } = useGlobe(containerRef);
 
   const [selected, setSelected] = useState<Validator | null>(null);
-  const { data: validators, loading, error } = useValidators(initialValidators);
+
+  const { data: validators, loading, error } =
+    useValidators(initialValidators);
 
   useEffect(() => {
-    if (!globeRef.current) return;
+    if (!globeRef.current || !isReady) return;
 
     globeRef.current
       .pointsData(validators)
@@ -48,7 +51,7 @@ export default function GlobeComponent({
       .onPointHover((point: Validator | null) => {
         document.body.style.cursor = point ? "pointer" : "default";
       });
-  }, [validators, selected, getAltitude]);
+  }, [validators, selected, isReady, getAltitude]);
 
   return (
     <>

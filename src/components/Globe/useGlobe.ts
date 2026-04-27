@@ -1,9 +1,12 @@
 "use client";
 
-import { useEffect, useRef, RefObject } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export function useGlobe(containerRef: React.RefObject<HTMLDivElement | null>) {
+export function useGlobe(
+  containerRef: React.RefObject<HTMLDivElement | null>
+) {
   const globeRef = useRef<any>(null);
+  const [isReady, setIsReady] = useState(false);
 
   const getAltitude = () => {
     if (typeof window === "undefined") return 2;
@@ -39,6 +42,8 @@ export function useGlobe(containerRef: React.RefObject<HTMLDivElement | null>) {
         .height(containerRef.current.clientHeight);
 
       globeInstance.pointOfView({ altitude: getAltitude() }, 0);
+
+      setIsReady(true);
     };
 
     init();
@@ -73,5 +78,5 @@ export function useGlobe(containerRef: React.RefObject<HTMLDivElement | null>) {
     };
   }, [containerRef]);
 
-  return { globeRef, getAltitude };
+  return { globeRef, getAltitude, isReady };
 }
