@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, RefObject } from "react";
 
-export function useGlobe(containerRef: React.RefObject<HTMLDivElement>) {
+export function useGlobe(containerRef: React.RefObject<HTMLDivElement | null>) {
   const globeRef = useRef<any>(null);
 
   const getAltitude = () => {
